@@ -14,10 +14,11 @@ export interface Meld {
 }
 
 export interface Rules {
-  targetScore: 5000 | 10000;
+  targetScore: 5000 | 10000 | 15000;
   drawTwo: boolean;
   wildCanastas: boolean;
   toughEnd: boolean;
+  extremeEnd: boolean;
   harderFirstMeld: boolean;
   strictWildCards: boolean;
   blackThreePenalty: boolean;
@@ -30,6 +31,7 @@ export const DEFAULT_RULES: Rules = {
   drawTwo: false,
   wildCanastas: false,
   toughEnd: false,
+  extremeEnd: false,
   harderFirstMeld: false,
   strictWildCards: false,
   blackThreePenalty: false,

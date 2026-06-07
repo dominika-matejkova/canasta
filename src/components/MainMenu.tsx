@@ -105,7 +105,7 @@ export default function MainMenu({ onStart }: Props) {
             Game Length
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
-            {([5000, 10000] as const).map(score => (
+            {([5000, 10000, 15000] as const).map(score => (
               <button key={score} onClick={() => set('targetScore', score)} style={{
                 flex: 1, padding: '8px 0', borderRadius: 8, border: 'none', cursor: 'pointer',
                 background: rules.targetScore === score ? '#d97706' : '#1f2937',
@@ -113,7 +113,7 @@ export default function MainMenu({ onStart }: Props) {
                 fontSize: 13, fontWeight: 600,
                 transition: 'all 0.2s',
               }}>
-                {score.toLocaleString()} pts
+                {String(score).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} pts
               </button>
             ))}
           </div>
@@ -137,7 +137,8 @@ export default function MainMenu({ onStart }: Props) {
               <Toggle label="Three Decks" desc="Use 3 decks (162 cards + 6 jokers = 168 total) instead of 2" value={rules.threeDecks} onChange={v => set('threeDecks', v)} />
               <Toggle label="Draw Two" desc="Draw 2 cards from stock each turn instead of 1" value={rules.drawTwo} onChange={v => set('drawTwo', v)} />
               <Toggle label="Wild Canastas" desc="Allow all-wildcard melds; completed = 2000 pts, incomplete = card values only" value={rules.wildCanastas} onChange={v => set('wildCanastas', v)} />
-              <Toggle label="Tough End" desc="Need 2 canastas or at least 1 natural canasta to go out" value={rules.toughEnd} onChange={v => set('toughEnd', v)} />
+              <Toggle label="Tough End" desc="Need 2 canastas or at least 1 natural canasta to go out" value={rules.toughEnd} onChange={v => setRules(r => ({ ...r, toughEnd: v, extremeEnd: v ? false : r.extremeEnd }))} />
+              <Toggle label="Extreme End" desc="Need 3 canastas or at least 2 natural canastas to go out" value={rules.extremeEnd} onChange={v => setRules(r => ({ ...r, extremeEnd: v, toughEnd: v ? false : r.toughEnd }))} />
               <Toggle label="Harder First Meld" desc="Opening meld minimums raised: 50/90/120/150 pts (standard: 15/50/90/120)" value={rules.harderFirstMeld} onChange={v => set('harderFirstMeld', v)} />
               <Toggle label="Strict Wild Cards" desc="Max 2 wildcards per meld; must have 5 natural cards in the meld before adding any wilds" value={rules.strictWildCards} onChange={v => set('strictWildCards', v)} />
               <Toggle label="Always Frozen Pile" desc="Pile is frozen from the start of every round (wildcards always freeze regardless)" value={rules.frozenPile} onChange={v => set('frozenPile', v)} />
@@ -159,7 +160,7 @@ export default function MainMenu({ onStart }: Props) {
         </button>
 
         <div style={{ textAlign: 'center', marginTop: 16, fontSize: 11, color: '#374151' }}>
-          2-player Classic Canasta · 2 decks + 4 jokers · 108 cards
+          2-player Classic Canasta · 2–3 decks · 8 rule variants
         </div>
       </div>
     </div>

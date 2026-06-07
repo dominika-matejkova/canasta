@@ -84,6 +84,9 @@ export function initialMeldMinimum(totalScore: number, harder: boolean): number 
 
 export function canGoOut(player: { melds: Meld[]; hand: Card[] }, rules: Rules): boolean {
   const canastas = player.melds.filter(m => isCanasta(m));
+  if (rules.extremeEnd) {
+    return canastas.length >= 3 || canastas.filter(m => isNaturalCanasta(m)).length >= 2;
+  }
   if (rules.toughEnd) {
     return canastas.length >= 2 || canastas.some(m => isNaturalCanasta(m));
   }
