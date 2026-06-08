@@ -154,7 +154,10 @@ function computeMeldActions(state: GameState): GameAction[] {
   const wilds = hand.filter(c => isWild(c));
   let wildPool = [...wilds];
 
-  for (const [, cards] of byRank) {
+  for (const [rank, cards] of byRank) {
+    // Skip if an open (non-canasta) meld of this rank already exists
+    if (player.melds.some(m => m.rank === rank && !isCanasta(m))) continue;
+
     let meldCards: Card[] = [];
 
     let wildsUsed = 0;

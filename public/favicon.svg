@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Card 1 (back, rotated) -->
+  <rect x="3" y="6" width="18" height="24" rx="3" fill="#1e3a5f" transform="rotate(-12 12 18)"/>
+  <rect x="4.5" y="7.5" width="15" height="21" rx="2" fill="#2a52a0" transform="rotate(-12 12 18)"/>
+  <!-- Card 2 (front) -->
+  <rect x="11" y="6" width="18" height="24" rx="3" fill="#f8fafc"/>
+  <rect x="12" y="7" width="16" height="22" rx="2" fill="white"/>
+  <!-- Heart suit -->
+  <text x="13" y="19" font-size="13" font-family="serif" fill="#dc2626">♥</text>
+</svg>

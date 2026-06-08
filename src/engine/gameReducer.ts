@@ -370,6 +370,12 @@ function createMeld(state: GameState): GameState {
   }
 
   const rank = meldRank(cards);
+
+  // Block new meld if an open (non-canasta) meld of the same rank already exists — add to it instead
+  const existingOpen = player.melds.find(m => m.rank === rank && !isCanasta(m));
+  if (existingOpen) {
+    return { ...state, message: `Already have an open ${rank} meld — select it to add cards.` };
+  }
   const openingValue = cards.filter(c => !isBlack3(c)).reduce((s, c) => s + cardPointValue(c), 0);
   const newOpeningPoints = state.openingTurnMeldPoints + openingValue;
   const min = initialMeldMinimum(player.totalScore, state.rules.harderFirstMeld);
